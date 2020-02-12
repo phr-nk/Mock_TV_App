@@ -35,8 +35,11 @@ class ViewController: UIViewController {
     
     
     var prevChannel: String?
-    var num1:Int?
     var isTyping = false //determine if still typing number
+    let ABC: Int = 50
+    let NBC: Int = 3
+    let CBS: Int = 20
+    let FOX: Int = 80
     
     @IBAction func channelPressed(_ sender: UIButton) {
         if let channel = sender.currentTitle
@@ -125,10 +128,22 @@ class ViewController: UIViewController {
     @IBAction func favChannel(_ sender: UISegmentedControl) {
         if let fav = sender.titleForSegment(at: sender.selectedSegmentIndex)
         {
-            prevChannel = fav
+            switch(fav)
+            {
+            case "ABC":
+                channelLabel.text = String(ABC)
+            case "NBC":
+                 channelLabel.text = String(NBC)
+            case "CBS":
+                 channelLabel.text = String(CBS)
+            case "FOX":
+                 channelLabel.text = String(FOX)
             
-        }
+            default:
+                 channelLabel.text = String(ABC)
+            }
         
+      }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
