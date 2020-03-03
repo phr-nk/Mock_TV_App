@@ -7,6 +7,10 @@
 //
 
 import UIKit
+var fav_1 = Config(_id:1,_num:60,_label:"ABC")
+var fav_2 = Config(_id:2,_num:6,_label:"NBC")
+var fav_3 = Config(_id:3,_num:80,_label:"CBS")
+var fav_4 = Config(_id:4,_num:10,_label:"FOX")
 
 class ViewController: UIViewController {
     @IBOutlet weak var volumeLabel: UILabel!
@@ -33,13 +37,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var button8: UIButton!
     @IBOutlet weak var button9: UIButton!
     
+    @IBOutlet weak var image: UIImageView!
     
     var prevChannel: String?
     var isTyping = false //determine if still typing number
-    let ABC: Int = 50
-    let NBC: Int = 3
-    let CBS: Int = 20
-    let FOX: Int = 80
+  
     
     @IBAction func channelPressed(_ sender: UIButton) {
         if let channel = sender.currentTitle
@@ -82,6 +84,7 @@ class ViewController: UIViewController {
         if sender.isOn {
             channelLabel.text = prevChannel
             powerLabel.textColor = UIColor .green;
+       
       
            
         }
@@ -90,6 +93,7 @@ class ViewController: UIViewController {
             prevChannel = channelLabel.text
             powerLabel.textColor = UIColor .red;
             channelLabel.text = "off"
+         
         }
      
             
@@ -126,24 +130,29 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func favChannel(_ sender: UISegmentedControl) {
-        if let fav = sender.titleForSegment(at: sender.selectedSegmentIndex)
-        {
+        let fav = sender.selectedSegmentIndex
+    
             switch(fav)
             {
-            case "ABC":
-                channelLabel.text = String(ABC)
-            case "NBC":
-                 channelLabel.text = String(NBC)
-            case "CBS":
-                 channelLabel.text = String(CBS)
-            case "FOX":
-                 channelLabel.text = String(FOX)
+            case 0:
+                channelLabel.text = String(fav_1.get_num())
+            case 1:
+                channelLabel.text = String(fav_2.get_num())
+            case 2:
+                channelLabel.text = String(fav_3.get_num())
+            case 3:
+                channelLabel.text = String(fav_4.get_num())
             
             default:
-                 channelLabel.text = String(ABC)
+                channelLabel.text = String(fav_1.get_num())
             }
         
-      }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        favSeg.setTitle(fav_1.get_label(), forSegmentAt: 0)
+        favSeg.setTitle(fav_2.get_label(), forSegmentAt: 1)
+        favSeg.setTitle(fav_3.get_label(), forSegmentAt: 2)
+        favSeg.setTitle(fav_4.get_label(), forSegmentAt: 3)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,6 +161,8 @@ class ViewController: UIViewController {
         powerLabel.textColor = UIColor .red
         channelLabel.text = "off"
         volumeSlider.isEnabled = false
+        favSeg.isEnabled = false
+ 
     }
     
 
